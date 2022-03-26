@@ -14,14 +14,19 @@ sudo systemctl start elasticsearch.service
 sudo systemctl enable elasticsearch.service
 curl 127.0.0.1:9200
 
-# Settings
+# Cluster Settings
+hostnamectl set-hostname global-linux-es1
 vim /etc/elasticsearch/elasticsearch.yml
 
 cluster.name: global-monitoring
-node.name: node-1
+node.name: global-linux-es1
 # By default Elasticsearch is only accessible on localhost. Set a different 
 # address here to expose this node on the network:
 network.host: 192.168.0.10
+cluster.initial_master_nodes: ["global-linux-es1"]
+
+curl 192.168.0.10:9200 # local host will not work
+hostnamectl set-hostname global-linux-es1
 
 ```
 
