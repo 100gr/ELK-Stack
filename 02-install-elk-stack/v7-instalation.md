@@ -1,5 +1,8 @@
 # ELK Stack : INSTALLATION on Ubuntu 20.04.4 LTS
 
+# CONFIGURE REPO
+
+
 <br>
 
 ```
@@ -7,14 +10,27 @@ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add
 sudo apt-get install apt-transport-https
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
 sudo apt-get update
+```
+
+------------------------------------------------------------
+
+# ELASTICSEARCH : INSTALLATION
+
+
+<br>
+
+```
 sudo apt-get install elasticsearch
 sudo systemctl status elasticsearch.service
 # edit Xmx and Xms /etc/elasticsearch/jvm.options
 sudo systemctl start elasticsearch.service
 sudo systemctl enable elasticsearch.service
 curl 127.0.0.1:9200
+```
 
-# Cluster Settings
+* Cluster Settings
+
+```
 hostnamectl set-hostname global-linux-es1
 vim /etc/elasticsearch/elasticsearch.yml
 
@@ -25,19 +41,15 @@ node.name: global-linux-es1
 network.host: 192.168.0.10
 cluster.initial_master_nodes: ["global-linux-es1"]
 
-curl 192.168.0.10:9200 # local host will not work
-hostnamectl set-hostname global-linux-es1
-
+curl 192.168.0.10:9200 # localhost will not work
 ```
 
 ------------------------------------------------------------
 
-# 02 ELK Stack : INSTALLATION
+# KIBANA : INSTALLATION
 
 
 <br>
-
-* install of kibana
 
 ```
 sudo apt-get install kibana
@@ -49,15 +61,22 @@ sudo systemctl enable kibana.service
 
 ------------------------------------------------------------
 
-# 02 ELK Stack : INSTALLATION
+# LOGSTASH : INSTALLATION
+
 
 <br>
-
-* install of logstash
 
 ```
 sudo apt-get install logstash
 sudo systemctl status logstash.service
 sudo systemctl start logstash.service
 sudo systemctl enable logstash.service
+```
+
+* Cluster Settings
+
+```
+hostnamectl set-hostname global-linux-es1
+
+
 ```
