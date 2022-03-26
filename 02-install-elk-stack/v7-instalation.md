@@ -10,20 +10,19 @@ sudo apt-get update
 sudo apt-get install elasticsearch
 sudo systemctl status elasticsearch.service
 # edit Xmx and Xms /etc/elasticsearch/jvm.options
-sysctl -w m.max_map_count=262144
 sudo systemctl start elasticsearch.service
 sudo systemctl enable elasticsearch.service
 curl 127.0.0.1:9200
 
-# Cluster Settings
+# Settings
 vim /etc/elasticsearch/elasticsearch.yml
 
 cluster.name: global-monitoring
-node.name: global-linux-es1
+node.name: node-1
 # By default Elasticsearch is only accessible on localhost. Set a different 
 # address here to expose this node on the network:
 network.host: 192.168.0.10
-cluster.initial_master_nodes: ["global-linux-es1"]
+
 ```
 
 ------------------------------------------------------------
