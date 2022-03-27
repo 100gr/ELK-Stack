@@ -58,6 +58,19 @@ sudo systemctl start kibana.service
 sudo systemctl enable kibana.service
 ```
 
+# Cluster Settings
+
+```
+systemctl set-hostname global-linux-kb1
+
+vim /etc/kibana/kibana.yml
+server.host: "192.168.0.12"
+server.name: "global-linux-kb1"
+elasticsearch.hosts: ["http://192.168.0.10:9200"]
+
+http://192.168.0.45:5601/app/home#/
+```
+
 ------------------------------------------------------------
 
 # LOGSTASH : INSTALLATION
@@ -88,14 +101,14 @@ hostnamectl set-hostname global-linux-ls1
 # To check if data made it
 curl http://192.168.0.10.:9200/logstash-*/_search
 # By default, Logstash will create indices, that is, where the data is sgtored, using the format "logstash-" and then the data.
-# '*' ignore the date and search any indices that match
+# * - ignore the date and search any indices that match
 # _search - empty search to match all hits
 
 
 
 ```
 
-* Returned result it hard to parse visually
+* Returned result hard to parse visually
 
 ```
 sudo apt install jq
